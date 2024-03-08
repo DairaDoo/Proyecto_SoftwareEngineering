@@ -8,13 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Hola Mundo</h1>
-    <div>
-        <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Titulo pato</span></h1>
-    </div>
-    <div class="container">
+    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">Lego Serious Play</h1>
+
+    <div class="flex flex-col justify-center items-center min-h-screen bg-yellow-50">
+        <!-- Contenedores superiores -->
+        <div class="flex justify-between w-full p-4 bg-white mb-4">
+          <div class="w-1/4 p-4 bg-gray-200">
+            <img src="imagen1.jpg" alt="Imagen 1">
+          </div>
+          <div class="w-1/4 p-4 bg-gray-200">
+            <img src="imagen2.jpg" alt="Imagen 2">
+          </div>
+        </div>
         
-    </div>
+        <!-- Contenedor central - Carrusel -->
+        <div class="relative w-2/3 p-8 bg-white">
+          <div class="flex items-center">
+            <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-300 px-4 py-2 rounded-full">&#8249;</button>
+            <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-300 px-4 py-2 rounded-full">&#8250;</button>
+            <div class="flex overflow-hidden">
+              <div id="carousel" class="flex-shrink-0 w-64 h-64 bg-gray-300 mr-4">Paso 1</div>
+              <div id="carousel" class="flex-shrink-0 w-64 h-64 bg-gray-300 mr-4">Paso 2</div>
+              <div id="carousel" class="flex-shrink-0 w-64 h-64 bg-gray-300 mr-4">Paso 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     
 </body>
 </html>
