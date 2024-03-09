@@ -12,7 +12,7 @@
 
     <div class="flex flex-col justify-center items-center min-h-screen bg-yellow-50">
         <!-- Contenedores superiores -->
-        <div class="flex justify-between w-full p-4 bg-white mb-4 ">
+        <div class="flex justify-between w-full p-3 bg-white mb-4 ">
           <div class="w-1/4 p-4 bg-gray-200">
             <img src="./imgs/duck_example_img.webp" alt="Imagen 1">
             <h1 class="text-center bg-blue-400">
@@ -21,25 +21,31 @@
                 </button>
             </h1>
           </div>
-          <div class="flex justify-center items-center h-screen">
-            <div class="relative w-72">
+          <div class="flex justify-center items-center h-auto">
+            <div class="relative w-80">
                 <!-- Carrusel -->
                 <div id="carousel" class="overflow-hidden rounded-lg">
                     <!-- Contenedor de las imágenes -->
                     <div class="flex transition-transform duration-300 ease-in-out">
-                        <img src="./imgs/duck_example_img2.jpeg" class="w-full" alt="Slide 1">
-                        <img src="./imgs/duck_example_img.webp" class="w-full" alt="Slide 2">
-                        <img src="./imgs/duck_example_img2.jpeg" class="w-full" alt="Slide 3">
+                        <div class="w-full flex-shrink-0">
+                            <img src="./imgs/duck_example_img2.jpeg" class="w-full flex-shrink-100 border-2 border-blue-300" alt="Slide 1">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="./imgs/duck_example_img.webp" class="w-full  flex-shrink-100 border-2 border-blue-300" alt="Slide 2">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="./imgs/duck_example_img2.jpeg" class="w-full flex-shrink-100 border-2 border-blue-300" alt="Slide 3">
+                        </div>
                     </div>
                 </div>
                 <!-- Botones de control -->
                 <div class="relative">
-                    <img src="tu-imagen.jpg" class="w-full" alt="Imagen">
                     <div class="absolute top-0 left-0 flex justify-between w-full px-2 py-2">
                         <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md">Previous</button>
-                        <button id ="nextBtn" class="bg-green-500 text-white px-4 py-2 rounded-md ml-4">Next</button>
+                        <button id="nextBtn" class="bg-green-500 text-white px-4 py-2 rounded-md ml-4">Next</button>
                     </div>
                 </div>
+                
                 
             </div>
         </div>

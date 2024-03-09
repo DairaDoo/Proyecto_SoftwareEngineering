@@ -12,9 +12,7 @@
 }
 
 /*Color del Background de la pagina*/
-body {
-    background-color: #FFFFE0;
-}
+
 
 .hidden {
     display: none;
