@@ -2,17 +2,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Additional custom styles can go below */
-.body {
-    background: black;
+
+/*Contenedor central*/
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Opcional: ajusta la altura al tamaño de la ventana */
 }
 
-.container {
-    width: 80%; /* Ancho del contenedor */
-    margin: 0 auto; /* Centrar horizontalmente el contenedor */
-    padding: 20px; /* Espaciado interno del contenedor */
-    background-color: #f0f0f0; /* Color de fondo del contenedor */
-    border: 1px solid #ccc; /* Borde del contenedor */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra del contenedor */
+/*Color del Background de la pagina*/
+body {
+    background-color: #FFFFE0;
 }
+
+.hidden {
+    display: none;
+  }
 

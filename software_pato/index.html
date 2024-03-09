@@ -8,10 +8,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Titulo pato</span></h1>
+    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl text-center">Lego Serious Play</h1>
+
+    <div class="flex flex-col justify-center items-center min-h-screen bg-yellow-50">
+        <!-- Contenedores superiores -->
+        <div class="flex justify-between w-full p-4 bg-white mb-4 ">
+          <div class="w-1/4 p-4 bg-gray-200">
+            <img src="./imgs/duck_example_img.webp" alt="Imagen 1">
+            <h1 class="text-center bg-blue-400">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Duck 1
+                </button>
+            </h1>
+          </div>
+          <div class="flex justify-center items-center h-screen">
+            <div class="relative w-72">
+                <!-- Carrusel -->
+                <div id="carousel" class="overflow-hidden rounded-lg">
+                    <!-- Contenedor de las imágenes -->
+                    <div class="flex transition-transform duration-300 ease-in-out">
+                        <img src="./imgs/duck_example_img2.jpeg" class="w-full" alt="Slide 1">
+                        <img src="./imgs/duck_example_img.webp" class="w-full" alt="Slide 2">
+                        <img src="./imgs/duck_example_img2.jpeg" class="w-full" alt="Slide 3">
+                    </div>
+                </div>
+                <!-- Botones de control -->
+                <div class="relative">
+                    <img src="tu-imagen.jpg" class="w-full" alt="Imagen">
+                    <div class="absolute top-0 left-0 flex justify-between w-full px-2 py-2">
+                        <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md">Previous</button>
+                        <button id ="nextBtn" class="bg-green-500 text-white px-4 py-2 rounded-md ml-4">Next</button>
+                    </div>
+                </div>
+                
+            </div>
         </div>
+          <div class="w-1/4 p-4 bg-gray-200">
+            <img src="./imgs/duck_example_img.webp" alt="Imagen 2">
+            <h1 class="text-center bg-red-400">
+                <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Duck 2
+                </button>
+            </h1>
+          </div>
+
+          <body class="bg-gray-100">
     </div>
-    <div class="container"></div>
+
+        
+    
+      <script src="script.js"></script>
+    
 </body>
 </html>
