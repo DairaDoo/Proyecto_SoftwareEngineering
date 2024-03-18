@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
   const slides = carousel.querySelectorAll("img");
+  const indice_guia = document.getElementById('indice-guia');
   let currentIndex = 0;
 
   // Función para mostrar el slide actual
@@ -54,17 +55,41 @@ document.addEventListener("DOMContentLoaded", function() {
   function nextSlide() {
       currentIndex = (currentIndex + 1) % slides.length;
       showSlide(currentIndex);
+      incrementGuideCounter();  
+      
+  }
+
+  function incrementGuideCounter() {
+    indice = +indice_guia.innerHTML;
+
+    if (indice >= 9) {
+        indice = 0;
+    }
+
+    indice_guia.innerHTML = indice + 1;
+  }
+
+  function decrementGuideCounter() {
+    indice = +indice_guia.innerHTML;
+
+    if (indice <= 1) {
+        indice = 10;
+    }
+
+    indice_guia.innerHTML = indice - 1;
   }
 
   // Función para retroceder al slide anterior
   function prevSlide() {
       currentIndex = (currentIndex - 1 + slides.length) % slides.length;
       showSlide(currentIndex);
+      decrementGuideCounter()
   }
 
   // Event listeners para los botones de control
   prevBtn.addEventListener("click", prevSlide);
   nextBtn.addEventListener("click", nextSlide);
+
 
   // Mostrar el primer slide al cargar la página
   showSlide(currentIndex);
