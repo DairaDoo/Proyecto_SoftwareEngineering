@@ -4,18 +4,8 @@
 
 
 /*Contenedor central*/
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Opcional: ajusta la altura al tamaño de la ventana */
-}
+
 
 /*Color del Background de la pagina*/
-
-
-.hidden {
-    display: none;
-  }
 
 
