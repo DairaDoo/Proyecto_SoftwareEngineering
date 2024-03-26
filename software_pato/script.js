@@ -103,4 +103,37 @@ document.addEventListener("DOMContentLoaded", function() {
   }).catch(error => {
     console.error("Error loading images", error);
   });
+
+
+  let stepCount = 0; // Contador de pasos
+  // Manejar el clic en Duck 1
+  document.getElementById('Duck1').addEventListener('click', function() {
+    document.getElementById('duck1Container').style.opacity = '1';
+    document.getElementById('duck2Container').style.opacity = '0.5';
+    stepCount = 0; // Reiniciar el contador de pasos
+  });
+
+  // Manejar el clic en Duck 2
+  document.getElementById('Duck2').addEventListener('click', function() {
+    document.getElementById('duck1Container').style.opacity = '0.5';
+    document.getElementById('duck2Container').style.opacity = '1';
+    stepCount = 0; // Reiniciar el contador de pasos
+  });
+
+  // Manejar el clic en Next
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    // Incrementar el contador de pasos
+    stepCount++;
+
+    // Restablecer la opacidad de ambos patos si se alcanza el máximo de pasos (9 en este caso)
+    if (stepCount >= 9) {
+        document.getElementById('duck1Container').style.opacity = '1';
+        document.getElementById('duck2Container').style.opacity = '1';
+        stepCount = 0; // Reiniciar el contador de pasos
+      }
+  });
+
+
+
+
 });
