@@ -9,10 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const Duck2Btn = document.getElementById("Duck2");
   
   function chooseStartingDuck() {
+    
     prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
     nextBtn.className = "bg-green-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
     indice_guia.style.opacity = 0.5;
     carousel.style.opacity = 0.5;
+    document.getElementById('duck1Container').style.opacity = '1';
+    document.getElementById('duck2Container').style.opacity = '1';
+    nextBtn.setAttribute("disabled", "disabled");
+
   }
 
   chooseStartingDuck();
@@ -42,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ]
   ];
 
+
   let currentDuckType = 0;
   let currentIndex = 0;
 
@@ -59,15 +65,46 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function incrementGuideCounter() {
+
+    let indice = +indice_guia.innerHTML;
+
+    if (indice >= 9) {
+      indice = indice_guia.innerHTML;
+      indice_guia.innerHTML = 1;
+      chooseStartingDuck();
+    } else {
+      indice += 1;
+    }
+
+    if ( indice_guia.innerHTML > 1) {
+      prevBtn.className = prevBtnOriginalClass;
+      prevBtn.removeAttribute("disabled");
+    }
+
+
     indice_guia.innerHTML = indice;
-    indice = indice > 9 ? indice = 1 : indice + 1;
-    let indice = + indice_guia.innerHTML;
   }
 
   function decrementGuideCounter() {
+    let indice = indice_guia.innerHTML;
+
+    indice_guia.innerHTML = 1;
+
+    indice -= 1;
+    
+    if (indice <= 1) {
+      indice = 1;
+    }
+    
+    if ( indice_guia.innerHTML >= 1) {
+      prevBtn.className = prevBtnOriginalClass;
+      prevBtn.removeAttribute("disabled");
+    }
+
     indice_guia.innerHTML = indice;
-    let indice = +indice_guia.innerHTML;
-    indice = indice <= 1 ? indice = 1 : indice - 1;
+    prevBtn.setAttribute("disabled", "disabled");
+    prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
+
   }
 
   function showSlide(index) {
@@ -94,17 +131,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Duck 1 function.
   Duck1Btn.addEventListener("click", function() {
-    currentDuckType = 0;
+    currentDuckType = 1;
     currentIndex = 0;
     showSlide(currentIndex);
     indice_guia.innerHTML = 1; // Reset the guide counter when duck changes
     document.getElementById('duck1Container').style.opacity = '1';
     document.getElementById('duck2Container').style.opacity = '0.33';
     stepCount = 0; // Reiniciar el contador de pasos
-    prevBtn.className = prevBtnOriginalClass;
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
+    nextBtn.removeAttribute("disabled");
+    stepCount = 0;
   });
 
   // Duck 2 function.
@@ -116,10 +154,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('duck1Container').style.opacity = '0.33';
     document.getElementById('duck2Container').style.opacity = '1';
     stepCount = 0; // Reiniciar el contador de pasos
-    prevBtn.className = prevBtnOriginalClass;
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
+    nextBtn.removeAttribute("disabled");
+    stepCount = 0;
   });
 
   prevBtn.addEventListener("click", prevSlide);
