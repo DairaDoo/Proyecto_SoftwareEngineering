@@ -59,15 +59,15 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function incrementGuideCounter() {
-    indice_guia.innerHTML = indice;
-    indice = indice > 9 ? indice = 1 : indice + 1;
     let indice = + indice_guia.innerHTML;
+    indice = indice > 9 ? chooseStartingDuck() : indice + 1;
+    indice_guia.innerHTML = indice;
   }
 
   function decrementGuideCounter() {
-    indice_guia.innerHTML = indice;
     let indice = +indice_guia.innerHTML;
-    indice = indice <= 1 ? indice = 1 : indice - 1;
+    indice = indice <= 1 ? chooseStartingDuck() : indice - 1;
+    indice_guia.innerHTML = indice;
   }
 
   function showSlide(index) {
