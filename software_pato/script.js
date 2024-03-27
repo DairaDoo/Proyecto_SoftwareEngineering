@@ -1,10 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
   const carousel = document.getElementById("carousel");
+  const prevBtnOriginalClass = document.getElementById("prevBtn").className;
+  const nextBtnOriginalClass = document.getElementById("nextBtn").className;
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
-  const indice_guia = document.getElementById('indice-guia');
+  const indice_guia = document.getElementById("indice-guia");
   const Duck1Btn = document.getElementById("Duck1");
   const Duck2Btn = document.getElementById("Duck2");
+  
+  function chooseStartingDuck() {
+    prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
+    nextBtn.className = "bg-green-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
+    indice_guia.style.opacity = 0.5;
+    carousel.style.opacity = 0.5;
+  }
+
+  chooseStartingDuck();
 
   const duckImages = [
     [
@@ -48,15 +59,15 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function incrementGuideCounter() {
-    let indice = +indice_guia.innerHTML;
-    indice = indice >= 9 ? 1 : indice + 1;
     indice_guia.innerHTML = indice;
+    indice = indice > 9 ? indice = 1 : indice + 1;
+    let indice = + indice_guia.innerHTML;
   }
 
   function decrementGuideCounter() {
-    let indice = +indice_guia.innerHTML;
-    indice = indice <= 1 ? 9 : indice - 1;
     indice_guia.innerHTML = indice;
+    let indice = +indice_guia.innerHTML;
+    indice = indice <= 1 ? indice = 1 : indice - 1;
   }
 
   function showSlide(index) {
@@ -72,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
     currentIndex = (currentIndex + 1) % duckImages[currentDuckType].length;
     showSlide(currentIndex);
     incrementGuideCounter();
+    
   }
 
   function prevSlide() {
@@ -80,18 +92,34 @@ document.addEventListener("DOMContentLoaded", function() {
     decrementGuideCounter();
   }
 
+  // Duck 1 function.
   Duck1Btn.addEventListener("click", function() {
     currentDuckType = 0;
     currentIndex = 0;
     showSlide(currentIndex);
     indice_guia.innerHTML = 1; // Reset the guide counter when duck changes
+    document.getElementById('duck1Container').style.opacity = '1';
+    document.getElementById('duck2Container').style.opacity = '0.33';
+    stepCount = 0; // Reiniciar el contador de pasos
+    prevBtn.className = prevBtnOriginalClass;
+    nextBtn.className = nextBtnOriginalClass;
+    indice_guia.style.opacity = 1;
+    carousel.style.opacity = 1;
   });
 
+  // Duck 2 function.
   Duck2Btn.addEventListener("click", function() {
     currentDuckType = 1;
     currentIndex = 0;
     showSlide(currentIndex);
     indice_guia.innerHTML = 1; // Reset the guide counter when duck changes
+    document.getElementById('duck1Container').style.opacity = '0.33';
+    document.getElementById('duck2Container').style.opacity = '1';
+    stepCount = 0; // Reiniciar el contador de pasos
+    prevBtn.className = prevBtnOriginalClass;
+    nextBtn.className = nextBtnOriginalClass;
+    indice_guia.style.opacity = 1;
+    carousel.style.opacity = 1;
   });
 
   prevBtn.addEventListener("click", prevSlide);
@@ -103,4 +131,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }).catch(error => {
     console.error("Error loading images", error);
   });
+
+
+
+  // Manejar el clic en Next
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    // Incrementar el contador de pasos
+    stepCount++;
+
+    // Restablecer la opacidad de ambos patos si se alcanza el máximo de pasos (9 en este caso)
+    if (stepCount > 9) {
+      chooseStartingDuck();
+      }
+  });
+
+
 });
