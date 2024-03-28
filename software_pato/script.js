@@ -9,10 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const Duck2Btn = document.getElementById("Duck2");
   
   function chooseStartingDuck() {
+    
     prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
     nextBtn.className = "bg-green-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
     indice_guia.style.opacity = 0.5;
     carousel.style.opacity = 0.5;
+    document.getElementById('duck1Container').style.opacity = '1';
+    document.getElementById('duck2Container').style.opacity = '1';
+    nextBtn.setAttribute("disabled", "disabled");
+
   }
 
   chooseStartingDuck();
@@ -42,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ]
   ];
 
+
   let currentDuckType = 0;
   let currentIndex = 0;
 
@@ -58,19 +64,51 @@ document.addEventListener("DOMContentLoaded", function() {
     await Promise.all(loadPromises); // Espera a que todas las imágenes se carguen.
   }
 
+  // Carga todas las imágenes antes de habilitar la funcionalidad del carrusel.
+  preLoadImages().then(() => {
+    showSlide(currentIndex); // Muestra el primer slide solo después de cargar todas las imágenes.
+  }).catch(error => {
+    console.error("Error loading images", error);
+  });
+
+
   function incrementGuideCounter() {
-    let indice = + indice_guia.innerHTML;
-    indice = indice > 9 ? chooseStartingDuck() : indice + 1;
+
+    let indice = Number(indice_guia.innerHTML);
+
+    if (indice >= 9) {
+      indice = 1;
+      indice_guia.innerHTML = indice;
+      return chooseStartingDuck();
+    } 
+    
+    indice += 1;
+
+    if ( indice_guia.innerHTML <= 1) {
+      prevBtn.className = prevBtnOriginalClass;
+      prevBtn.removeAttribute("disabled");
+    }
+
     indice_guia.innerHTML = indice;
   }
 
   function decrementGuideCounter() {
-    let indice = +indice_guia.innerHTML;
-    indice = indice <= 1 ? chooseStartingDuck() : indice - 1;
+
+    let indice = Number(indice_guia.innerHTML);
+
+    if ( indice <= 1 ) {
+      prevBtn.setAttribute("disabled", "disabled");
+      prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
+      return;
+    }
+    
+    indice -= 1;
     indice_guia.innerHTML = indice;
+
   }
 
   function showSlide(index) {
+    updateButtonStates();
     carousel.innerHTML = "";
     const img = document.createElement("img");
     img.src = duckImages[currentDuckType][index];
@@ -92,6 +130,8 @@ document.addEventListener("DOMContentLoaded", function() {
     decrementGuideCounter();
   }
 
+  
+
   // Duck 1 function.
   Duck1Btn.addEventListener("click", function() {
     currentDuckType = 0;
@@ -101,11 +141,20 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('duck1Container').style.opacity = '1';
     document.getElementById('duck2Container').style.opacity = '0.33';
     stepCount = 0; // Reiniciar el contador de pasos
-    prevBtn.className = prevBtnOriginalClass;
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
+    nextBtn.removeAttribute("disabled");
+    stepCount = 0;
   });
+
+  function updateButtonStates() {
+    // If the current index is 0, disable the previous button.
+    if (currentIndex === 0) {
+        prevBtn.setAttribute("disabled", "disabled");
+        prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
+    }
+}
 
   // Duck 2 function.
   Duck2Btn.addEventListener("click", function() {
@@ -116,21 +165,15 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('duck1Container').style.opacity = '0.33';
     document.getElementById('duck2Container').style.opacity = '1';
     stepCount = 0; // Reiniciar el contador de pasos
-    prevBtn.className = prevBtnOriginalClass;
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
+    nextBtn.removeAttribute("disabled");
+    stepCount = 0;
   });
 
   prevBtn.addEventListener("click", prevSlide);
   nextBtn.addEventListener("click", nextSlide);
-
-  // Carga todas las imágenes antes de habilitar la funcionalidad del carrusel.
-  preLoadImages().then(() => {
-    showSlide(currentIndex); // Muestra el primer slide solo después de cargar todas las imágenes.
-  }).catch(error => {
-    console.error("Error loading images", error);
-  });
 
 
 
