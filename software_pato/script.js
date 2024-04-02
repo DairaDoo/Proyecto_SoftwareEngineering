@@ -81,30 +81,26 @@ document.addEventListener("DOMContentLoaded", function() {
       indice_guia.innerHTML = indice;
       return chooseStartingDuck();
     } 
-    
-    indice += 1;
 
-    if ( indice_guia.innerHTML <= 1) {
+    else if ( indice_guia.innerHTML <= 1) {
       prevBtn.className = prevBtnOriginalClass;
       prevBtn.removeAttribute("disabled");
     }
 
+    indice += 1;
+
     indice_guia.innerHTML = indice;
+    console.log("Indice: " , indice);
   }
 
   function decrementGuideCounter() {
 
     let indice = Number(indice_guia.innerHTML);
-
-    if ( indice <= 1 ) {
-      prevBtn.setAttribute("disabled", "disabled");
-      prevBtn.className = "bg-violet-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed";
-      return;
-    }
     
     indice -= 1;
     indice_guia.innerHTML = indice;
 
+    console.log("Indice: " , indice);
   }
 
   function showSlide(index) {
@@ -121,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
     currentIndex = (currentIndex + 1) % duckImages[currentDuckType].length;
     showSlide(currentIndex);
     incrementGuideCounter();
+    console.log("Current index: ", currentIndex);
     
   }
 
@@ -128,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
     currentIndex = (currentIndex - 1 + duckImages[currentDuckType].length) % duckImages[currentDuckType].length;
     showSlide(currentIndex);
     decrementGuideCounter();
+    console.log("Current index: ", currentIndex);
   }
 
   
@@ -140,12 +138,11 @@ document.addEventListener("DOMContentLoaded", function() {
     indice_guia.innerHTML = 1; // Reset the guide counter when duck changes
     document.getElementById('duck1Container').style.opacity = '1';
     document.getElementById('duck2Container').style.opacity = '0.33';
-    stepCount = 0; // Reiniciar el contador de pasos
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
     nextBtn.removeAttribute("disabled");
-    stepCount = 0;
+    console.log("Current index: ", currentIndex);
   });
 
   function updateButtonStates() {
@@ -164,29 +161,15 @@ document.addEventListener("DOMContentLoaded", function() {
     indice_guia.innerHTML = 1; // Reset the guide counter when duck changes
     document.getElementById('duck1Container').style.opacity = '0.33';
     document.getElementById('duck2Container').style.opacity = '1';
-    stepCount = 0; // Reiniciar el contador de pasos
     nextBtn.className = nextBtnOriginalClass;
     indice_guia.style.opacity = 1;
     carousel.style.opacity = 1;
     nextBtn.removeAttribute("disabled");
-    stepCount = 0;
+    console.log("Current Index: " , currentIndex)
   });
 
   prevBtn.addEventListener("click", prevSlide);
   nextBtn.addEventListener("click", nextSlide);
-
-
-
-  // Manejar el clic en Next
-  document.getElementById('nextBtn').addEventListener('click', function() {
-    // Incrementar el contador de pasos
-    stepCount++;
-
-    // Restablecer la opacidad de ambos patos si se alcanza el máximo de pasos (9 en este caso)
-    if (stepCount > 9) {
-      chooseStartingDuck();
-      }
-  });
 
 
 });
